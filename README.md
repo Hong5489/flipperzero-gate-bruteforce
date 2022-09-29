@@ -4,6 +4,8 @@ Brute force gate remote for SMC5326 and UNILARM using Flipper Zero, inspired by 
 
 Only works on UNILARM, SMC5326 and others remote that using the same protocol.
 
+Also can read my [blog post](https://hong5489.github.io/2022-09-23-gate-protocol/) on how I investigate the gate remote protocol
+
 ## UNILARM remote sample
 
 <img src="unilarm.JPG" width="500">
