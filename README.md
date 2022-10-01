@@ -40,7 +40,7 @@ Using `generate.py` you can generate all the .sub files to brute force, or you c
 
 Under `6561` folder got 1 file contains all 6561 combinations of DIP switch, `2187` contains 3 sub files that contains 2187 combinations, and `729` contains 9 sub files etc. (The less the combinations the more the sub files)
 
-To brute force all combinations of DIP switch, simply run the `0.sub` in the `6561` folder
+To brute force all combinations of DIP switch, simply run the `0_0.sub` in the `6561` folder
 
 To narrow down the brute force time, you need to run multiple times (Something like binary search)
 
@@ -48,9 +48,9 @@ For example:
 
 1. Your gate remote is `SMC5326` and frequency is `330MHz`
 2. Copy the folder `SMC5326_330` into flipper's sdcard `subghz` folder
-3. Play the `2187/0.sub` file and the gate opens
-4. Under the `729` folder, play 0,1,2.sub and see which files opens the gate
-5. If `1.sub` works, then play the 3,4,5.sub under `243` folder 
+3. Play the `2187/0_0.sub` file and the gate opens
+4. Under the `729` folder, play the sub starts with `0`: 0_0,1,2.sub and see which files opens the gate
+5. If `0_1.sub` works, then play the sub starts with `1`: 1_3,4,5.sub under `243` folder 
 6. Continue narrow down the combinations until you happy with the sending time of the .sub file
 
 **PS: Please test on your own gate or get permission before you test!**
