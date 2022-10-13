@@ -34,6 +34,8 @@ The protocol is similar to the PT-2262 Format (Princeton). More info [here in ru
 - Button 1 Instruction: 111010101
 - Button 2 Instruction: 101110101
 
+[Sample raw .sub files here](raw_sample)
+
 # How it works
 
 Using `generate.py` you can generate all the .sub files to brute force, or you can directly copy the generated .sub files into the flipper's SD card under the `/subghz` folder
