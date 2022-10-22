@@ -29,8 +29,10 @@ transposition_table = {
 
 stop_bit = "150 -5600 "
 
+total_bits = 25
 
 # Generate .sub files for Brute force UNILARM
+# Refer from https://medium.com/csg-govtech/breaking-protocol-d3988fa85eef
 sub_file = []
 lut = [0b00, 0b10, 0b11]
 gate1 = 3 << 7
@@ -43,7 +45,7 @@ for dip in range(3**8):
 	total <<= 9
 	total |= gate1
 	# Play the signal 3 times
-	sub_file.append("RAW_Data: " + key_bin_str_to_sub(bin(total)[2:])*3)
+	sub_file.append("RAW_Data: " + key_bin_str_to_sub(bin(total)[2:].zfill(total_bits))*3)
 
 # Create directory from 6561 to 9
 n_files = 7
@@ -86,7 +88,8 @@ for dip in range(3**8):
 	total <<= 9
 	total |= gate1
 	# Play the signal 5 times
-	sub_file.append("RAW_Data: " + key_bin_str_to_sub(bin(total)[2:])*5)
+	# Change to 3 if want to brute force faster
+	sub_file.append("RAW_Data: " + key_bin_str_to_sub(bin(total)[2:].zfill(total_bits))*5)
 
 # Create directory from 6561 to 7
 for s in splits:
@@ -99,4 +102,51 @@ for frequency in ["330000000","433920000"]:
 		n = 3**8 // i
 		for j in range(i):
 			open(f"SMC5326_{frequency[:3]}/{n}/{math.floor((j*n)/(n*3))}_{j}.sub",'w').write(file_header%(frequency)+'\n'.join(sub_file[j*n:(j*n)+n]))
+		i*=3
+
+# Generate .sub files for Brute force PT2260
+
+transposition_table = {
+	'0':'300 -850 ',
+	'1':'850 -300 '
+}
+
+stop_bit = "300 -8800 "
+
+total_bits = 24
+
+sub_file = []
+# Switch to center is inverted compare to UNILARM and SMC5326
+lut = [0b00, 0b01, 0b11]
+# Got four buttons
+button_open = 0b11
+button_lock = 0b1100
+button_stop = 0b110000
+button_close = 0b11000000
+
+for dip in range(3**8):
+	total = 0
+	for j in range(8):
+		total |= lut[dip % 3] << (2 * j)
+		dip //= 3
+	total <<= 8
+	total |= button_open
+	# Play the signal 5 times
+	# Change to 3 if want to brute force faster
+	sub_file.append("RAW_Data: " + key_bin_str_to_sub(bin(total)[2:].zfill(total_bits))*5)
+
+# Create directory from 6561 to 7
+for s in splits:
+	os.makedirs(f"PT2260_315/{s}", exist_ok=True)
+	os.makedirs(f"PT2260_330/{s}", exist_ok=True)
+	os.makedirs(f"PT2260_390/{s}", exist_ok=True)
+	os.makedirs(f"PT2260_433/{s}", exist_ok=True)
+
+
+for frequency in ["315000000","330000000","390000000","433920000"]:
+	i = 1
+	while i != 3**n_files:
+		n = 3**8 // i
+		for j in range(i):
+			open(f"PT2260_{frequency[:3]}/{n}/{math.floor((j*n)/(n*3))}_{j}.sub",'w').write(file_header%(frequency)+'\n'.join(sub_file[j*n:(j*n)+n]))
 		i*=3

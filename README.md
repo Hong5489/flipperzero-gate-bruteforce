@@ -14,15 +14,29 @@ Also can read my [blog post](https://hong5489.github.io/2022-09-23-gate-protocol
 
 <img src="smc5326.JPG" width="500">
 
+## PT2260 remote sample
+
+<img src="PT2260_front.jpg" width="250"><img src="PT2260_inside.jpg" width="250">
+
 ## Protocol Structure
 
-[ 16bits of DIP switch combinations ][ 9bits of Instruction base ][ 1bit for sync ]
+### UNILARM & SMC5326
+
+[ 16bits of DIP switch combinations ][ 9bits of Instruction base ]
 
 Example in [Pulse Plotter](https://my.flipp.dev/pulse-plotter): 
 
 ![protocol](protocol.png)
 
-The protocol is similar to the PT-2262 Format (Princeton). More info [here in russian](https://phreakerclub.com/447)
+### PT2260
+
+[ 16bits of DIP switch combinations ][ 8bits of Instruction base ]
+
+Example in [Pulse Plotter](https://my.flipp.dev/pulse-plotter): 
+
+![protocol](PT2260_protocol.png)
+
+Both protocol is similar to the PT-2262 Format (Princeton). More info [here in russian](https://phreakerclub.com/447)
 
 ### UNILARM
 - 150μs high 650μs low represent `0`, 550μs high 250μs low represent `1`
@@ -34,7 +48,22 @@ The protocol is similar to the PT-2262 Format (Princeton). More info [here in ru
 - Button 1 Instruction: 111010101
 - Button 2 Instruction: 101110101
 
+### PT2260
+- 300μs high 850μs low represent `0`, 850μs high 300μs low represent `1`
+- Button open Instruction: 00000011
+- Button lock Instruction: 00001100
+- Button stop Instruction: 00110000
+- Button close Instruction: 11000000
+
 [Sample raw .sub files here](raw_sample)
+
+## DIP switch
+
+Switch | UNILARM | SMC5326 | PT2260
+---|---|---|---
+`+` | 11 | 11 | 11
+`o` | 10 | 10 | 01
+`-` | 00 | 00 | 00
 
 # How it works
 
