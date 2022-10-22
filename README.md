@@ -1,8 +1,8 @@
 # Brute Force Gate Remote using Flipper Zero
 
-Brute force gate remote for SMC5326 and UNILARM using Flipper Zero, inspired by [Breaking Protocol](https://medium.com/csg-govtech/breaking-protocol-d3988fa85eef) and [flipperzero-bruteforce](https://github.com/tobiabocchi/flipperzero-bruteforce)
+Brute force gate remote for SMC5326, UNILARM and PT2260 using Flipper Zero, inspired by [Breaking Protocol](https://medium.com/csg-govtech/breaking-protocol-d3988fa85eef) and [flipperzero-bruteforce](https://github.com/tobiabocchi/flipperzero-bruteforce)
 
-Only works on UNILARM, SMC5326 and others remote that using the same protocol.
+Only works on UNILARM, SMC5326, PT2260 and others remote that using the same protocol.
 
 Also can read my [blog post](https://hong5489.github.io/2022-09-23-gate-protocol/) on how I investigate the gate remote protocol
 
